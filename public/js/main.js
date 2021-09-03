@@ -97,3 +97,12 @@ document.getElementById('leave-btn').addEventListener('click', () => {
     window.location = '../index.html';
   } 
 });
+
+function menuMobile(){
+  const btn = document.getElementById('chat-mobile');
+  if (btn.style.display == 'none') {
+    btn.style.display = 'inline-block';    
+  }else{
+    btn.style.display = 'none';
+  }
+}
