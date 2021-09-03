@@ -14,54 +14,56 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Set static folder
+// definir pasta principal
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName = 'ChatCord Bot';
+const botName = 'BOT ';
 
-// Run when client connects
+// quando o cliente se conectar ao servidor
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
 
-    // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to ChatCord!'));
+    // mensagem de boas vindas
+    socket.emit('message', formatMessage(botName, 'Bem-vindo ao chat!'));
 
-    // Broadcast when a user connects
-    socket.broadcast
-      .to(user.room)
-      .emit(
-        'message',
-        formatMessage(botName, `${user.username} has joined the chat`)
-      );
+    // disparar mensagem quando outro usuario entrar no chat
+   
+    // socket.broadcast
+    //   .to(user.room)
+    //   .emit(
+    //     'message',
+    //     formatMessage(botName, `${user.username} entrou no chat`)
+    //   );
 
-    // Send users and room info
+    // informar os usuarios que esta na sala
     io.to(user.room).emit('roomUsers', {
       room: user.room,
       users: getRoomUsers(user.room)
     });
   });
 
-  // Listen for chatMessage
+  // listas de mensagem do chat
   socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
-  // Runs when client disconnects
+  // quando o usuario se desconecta da sala
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io.to(user.room).emit(
-        'message',
-        formatMessage(botName, `${user.username} has left the chat`)
-      );
+      // io.to(user.room).emit(
+      //   'message',
+      //   formatMessage(botName, `${user.username} saiu do chat`)
+      // );
 
-      // Send users and room info
+
+      // envio de dados do usuario para a sala
       io.to(user.room).emit('roomUsers', {
         room: user.room,
         users: getRoomUsers(user.room)
@@ -70,6 +72,6 @@ io.on('connection', socket => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
