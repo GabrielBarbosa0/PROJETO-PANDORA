@@ -85,9 +85,36 @@ a {
 	padding: 10px 0;
 }
 
+.bars{
+	display: none;
+}
+
+.chat-mobile {
+	background: var(--dark-color-b);
+	color: #fff;
+	padding: 20px 20px 60px;
+	overflow-y: scroll;
+	display: none;
+}
+
+.chat-mobile h2 {
+	font-size: 20px;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.chat-mobile h3 {
+	margin-bottom: 15px;
+}
+
+.chat-mobile ul li {
+	padding: 10px 0;
+}
+
 .chat-messages {
 	padding: 30px;
-	max-height: 500px;
+	height: 70vh;
 	overflow-y: scroll;
 }
 
@@ -187,4 +214,9 @@ a {
 	.chat-sidebar {
 		display: none;
 	}
+
+	.bars{
+		display: inline-block;
+	}
+
 }

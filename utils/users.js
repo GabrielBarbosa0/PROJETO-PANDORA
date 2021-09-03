@@ -9,12 +9,12 @@ function userJoin(id, username, room) {
   return user;
 }
 
-// Get current user
+// pegar usuario atual
 function getCurrentUser(id) {
   return users.find(user => user.id === id);
 }
 
-// User leaves chat
+// atualizar lista de usuarios
 function userLeave(id) {
   const index = users.findIndex(user => user.id === id);
 
@@ -23,7 +23,7 @@ function userLeave(id) {
   }
 }
 
-// Get room users
+// pegar usuarios da sala
 function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
