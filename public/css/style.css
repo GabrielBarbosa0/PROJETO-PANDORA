@@ -38,7 +38,7 @@ a {
 	font-size: 17px;
 }
 
-/* Chat Page */
+/* pagina de chat */
 
 .chat-container {
 	max-width: 1100px;
@@ -162,12 +162,21 @@ a {
 	color: #fff;
 }
 
+@font-face {
+	font-family: 'Staatliches-Regular';
+	src:
+    	local('Staatliches-Regular'),
+    	url('../fonts/Staatliches-Regular.ttf');
+}
+
 .join-header {
 	text-align: center;
 	padding: 20px;
 	background: var(--dark-color-a);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	font-family: "Staatliches-Regular";
+	font-weight: bold;
 }
 
 .join-main {

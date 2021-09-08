@@ -7,16 +7,29 @@ const roomNameMobile = document.getElementById('room-name-mobile');
 const userListMobile = document.getElementById('users-mobile');
 
 // pegar o nome do usuario e sala pela URL
-const { username, room } = Qs.parse(location.search, {
+let { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
+
+if(room == ""){
+  for (var i = 2; i > 0; --i) room += (Math.floor(Math.random()*256)).toString(16);
+  room += "-";
+  for (var i = 2; i > 0; --i) room += (Math.floor(Math.random()*256)).toString(16);
+  room += "-";
+  for (var i = 2; i > 0; --i) room += (Math.floor(Math.random()*256)).toString(16);
+  let url = "/chat.html?username="
+  url += username;
+  url += "&room=";
+  url += room;
+  window.location.href = url;
+}
 
 const socket = io();
 
 // entrar na sala de chat
 socket.emit('joinRoom', { username, room });
 
-// pegar a sala e os uduarios da sala
+// pegar a sala e os usuarios da sala
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room);
   outputUsers(users);
